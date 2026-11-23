@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9C%89%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<title>Secret Santa · Winter Wonderland News</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --backdrop:#c9b68a; --backdrop2:#b8a273;
+  --paper:#f4e8cd; --paper2:#ebdbb4; --ink:#2b2017; --muted:#6b5943;
+  --green:#1f4a34; --red:#9a2228; --gold:#b08d3a; --rule:#cdb27a;
+  --serif:'Playfair Display','Didot',Georgia,'Times New Roman',serif;
+  --body:'Old Standard TT','Book Antiqua',Georgia,serif;
+  --type:'Special Elite','Courier New',Courier,monospace;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .12 0 0 0 .3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --sheet-shadow:0 18px 40px rgba(50,30,5,.4);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --backdrop:#0f1a14; --backdrop2:#16271e; --sheet-shadow:0 18px 50px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --backdrop:#0f1a14; --backdrop2:#16271e; --sheet-shadow:0 18px 50px rgba(0,0,0,.7); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;min-height:100%;padding:18px 12px 40px;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
+  background:var(--grain),radial-gradient(ellipse at 50% 0%,var(--backdrop2),var(--backdrop) 70%);
+  background-attachment:fixed;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ---------- the sheet ---------- */
+.sheet{
+  position:relative;max-width:520px;margin:0 auto;padding:36px 26px 28px;border-radius:14px;
+  background:var(--grain),radial-gradient(ellipse at center,transparent 50%,rgba(150,100,40,.3) 100%),var(--paper);
+  box-shadow:0 0 0 1px #a98a4c,var(--sheet-shadow),inset 0 0 50px rgba(130,90,30,.28);
+}
+.sheet::before{content:"";position:absolute;inset:9px;border:3px double var(--green);border-radius:8px;pointer-events:none;opacity:.75}
+
+/* masthead */
+header{text-align:center}
+.kicker{font-family:var(--serif);font-weight:700;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+h1{margin:8px 0 2px;font-family:var(--serif);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.02em}
+h1 .a{display:block;color:var(--green);font-size:clamp(2.6rem,13.5vw,3.9rem)}
+h1 .b{display:block;color:var(--red);font-size:clamp(3.4rem,18vw,5.4rem);font-style:italic}
+.tagline{font-style:italic;color:var(--muted);margin:6px auto 0;max-width:30ch;font-size:.95rem}
+.dateline{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 14px;margin-top:14px;padding:6px 0;border-top:3px solid var(--green);border-bottom:1px solid var(--green);
+  font-family:var(--serif);font-weight:700;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.orn{display:flex;align-items:center;gap:10px;color:var(--red);margin:18px 0;font-size:1.05rem;line-height:1}
+.orn::before,.orn::after{content:"";flex:1;height:0;border-top:1px solid var(--red);border-bottom:1px solid var(--red);padding-top:2px;opacity:.7}
+
+section{animation:rise .6s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+h2{font-family:var(--serif);font-weight:900;font-size:1.65rem;line-height:1.12;margin:0 0 6px;text-align:center;color:var(--ink)}
+.eyebrow{display:block;text-align:center;font-family:var(--serif);font-weight:700;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+.sub{text-align:center;font-style:italic;color:var(--muted);margin:0 0 18px}
+
+/* roll call */
+.roll{display:flex;flex-direction:column;gap:2px}
+.row-btn{
+  display:flex;align-items:baseline;gap:10px;width:100%;padding:13px 6px;border:none;background:transparent;cursor:pointer;color:var(--ink);text-align:left;font-family:var(--body);
+  border-bottom:1px solid var(--rule);transition:background .2s,color .2s,padding .2s;
+}
+.row-btn .no{font-family:var(--serif);font-weight:700;font-size:.7rem;letter-spacing:.14em;color:var(--red);min-width:2.2rem}
+.row-btn .nm{font-family:var(--serif);font-weight:900;font-size:1.45rem;line-height:1.1}
+.row-btn .dots{flex:1;border-bottom:2px dotted var(--rule);transform:translateY(-4px)}
+.row-btn .go{font-family:var(--serif);font-style:italic;font-weight:700;font-size:.92rem;color:var(--green)}
+.row-btn:hover,.row-btn:focus-visible{background:var(--green);color:var(--paper);padding-left:14px;padding-right:14px;outline:none}
+.row-btn:hover .no,.row-btn:focus-visible .no,.row-btn:hover .go,.row-btn:focus-visible .go{color:#e6c96f}
+.row-btn:hover .dots,.row-btn:focus-visible .dots{border-color:rgba(244,232,205,.5)}
+
+.btn{
+  font-family:var(--serif);font-weight:700;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;padding:13px 26px;border:none;cursor:pointer;border-radius:2px;
+  background:var(--green);color:#f4e8cd;box-shadow:inset 0 0 0 3px var(--green),inset 0 0 0 4px #d9b866,0 3px 0 rgba(0,0,0,.25);
+  transition:filter .2s,transform .1s;
+}
+.btn:hover{filter:brightness(1.18)}
+.btn:active{transform:translateY(2px)}
+.btn.red{background:var(--red);box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 4px #e4c46b,0 3px 0 rgba(0,0,0,.25)}
+.btn.ghost{background:transparent;color:var(--green);box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--green),0 0 0 1px var(--green)}
+.link{background:none;border:none;color:var(--muted);text-decoration:underline;font:inherit;font-style:italic;cursor:pointer;padding:6px}
+.center{text-align:center}
+
+/* ---------- envelope ---------- */
+.stage{perspective:1100px}
+.envelope{position:relative;width:min(340px,86%);aspect-ratio:3/2;margin:44px auto 16px;transform:rotate(-1.2deg);filter:drop-shadow(0 10px 8px rgba(50,30,5,.35));cursor:pointer}
+.envelope.open{cursor:default}
+.env-back{position:absolute;inset:0;background:var(--grain),#c5a96e;border-radius:3px}
+.letter{position:absolute;left:6%;right:6%;top:7%;bottom:7%;background:var(--grain),#fbf3de;padding:14px 14px;overflow:hidden;transition:transform 1s cubic-bezier(.25,.8,.3,1)}
+.letter b{display:block;font-family:var(--type);font-weight:400;font-size:.8rem;letter-spacing:.3em;color:var(--red);text-align:center}
+.letter i{display:block;height:2px;background:#d7c293;margin:11px 0}
+.env-front{position:absolute;inset:0;clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);border-radius:3px;
+  background:var(--grain),linear-gradient(165deg,#ecdbae,#dcc48c)}
+.flap{position:absolute;left:0;right:0;top:0;height:56%;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:3;border-radius:3px 3px 0 0;
+  background:var(--grain),linear-gradient(180deg,#d9be82,#cfb274);transition:transform .9s ease,z-index 0s .45s}
+.envelope.open .flap{transform:rotateX(180deg);z-index:0}
+.envelope.open .letter{transform:translateY(-38%)}
+.lines{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.lines.v{transition:opacity .3s}
+.envelope.open .lines.v{opacity:0}
+.addr{position:absolute;left:9%;bottom:12%;z-index:2;font-family:var(--type);color:#3b2a1a;font-size:.8rem;line-height:1.35;letter-spacing:.04em}
+.addr small{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.addr strong{font-weight:400;font-size:1.2rem;letter-spacing:.06em}
+.stamp-p{position:absolute;right:6%;bottom:11%;z-index:2;width:50px;height:60px;background:var(--green);border:5px dotted #f1e4c3;box-shadow:0 0 0 1px rgba(0,0,0,.2);
+  color:#f1e4c3;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;font-size:.6rem;line-height:1.1;text-align:center}
+.stamp-p span{font-size:.9rem;color:#e6c96f}
+.postmark{position:absolute;right:6px;bottom:7%;width:41%;z-index:5;color:#3a2a1c;opacity:.6;mix-blend-mode:multiply;pointer-events:none;transform:rotate(-8deg)}
+.seal{
+  position:absolute;left:50%;top:56%;width:64px;height:64px;margin:-32px 0 0 -32px;z-index:4;border:none;cursor:pointer;color:#f0c9a0;
+  border-radius:52% 48% 55% 45% / 47% 55% 45% 53%;
+  background:radial-gradient(circle at 36% 30%,#c9363c,#8a1a20 62%,#5e1015);
+  box-shadow:0 3px 5px rgba(0,0,0,.45),inset 0 -3px 5px rgba(0,0,0,.35),inset 0 2px 3px rgba(255,255,255,.2);
+  font-family:var(--serif);font-weight:900;font-size:1.7rem;line-height:1;text-shadow:0 -1px 0 rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.2);
+  animation:breathe 2.8s ease-in-out infinite;transition:transform .6s,opacity .6s;
+}
+.seal::after{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(240,201,160,.55)}
+@keyframes breathe{50%{transform:scale(1.06)}}
+.envelope.open .seal{opacity:0;transform:scale(1.5) rotate(18deg);pointer-events:none;animation:none}
+.tap{text-align:center;font-style:italic;color:var(--muted);margin:6px 0 0}
+.who-note{text-align:center;font-size:.92rem;color:var(--muted);margin:14px 0 0}
+
+/* ---------- letter overlay ---------- */
+.overlay{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(20,13,6,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.overlay.show{display:flex;animation:fadein .35s}
+@keyframes fadein{from{opacity:0}}
+.card{
+  position:relative;width:100%;max-width:420px;max-height:calc(100% - 12px);overflow:auto;padding:36px 28px 26px;text-align:center;border-radius:4px;
+  background:var(--grain),radial-gradient(ellipse at center,transparent 55%,rgba(150,100,40,.28) 100%),var(--paper);
+  box-shadow:0 0 0 1px #a98a4c,0 24px 50px rgba(0,0,0,.6),inset 0 0 40px rgba(130,90,30,.25);
+  animation:unfold .8s cubic-bezier(.2,.8,.3,1);
+}
+.card::before{content:"";position:absolute;inset:8px;border:3px double var(--green);opacity:.7;pointer-events:none}
+@keyframes unfold{from{transform:translateY(60px) rotate(-2deg) scale(.94);opacity:0}}
+.card .kick{font-family:var(--serif);font-weight:700;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.topsecret{display:inline-block;margin:12px 0 8px;padding:2px 14px;font-family:var(--type);font-size:1.45rem;letter-spacing:.2em;color:var(--red);border:3px double var(--red);transform:rotate(-4deg);opacity:.88;mix-blend-mode:multiply}
+.card .dear{font-family:var(--serif);font-style:italic;font-weight:700;font-size:1.45rem;margin:6px 0 2px}
+.card .lead{margin:0 0 10px;color:var(--muted)}
+.redact{position:relative;overflow:hidden;margin:6px 0 4px;padding:14px 6px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);cursor:pointer}
+.redact .nm{font-family:var(--serif);font-weight:900;text-transform:uppercase;letter-spacing:.05em;font-size:2.3rem;line-height:1.1;color:var(--green);word-break:break-word}
+.tape{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--type);font-size:.95rem;letter-spacing:.4em;color:#bfae8b;
+  background:repeating-linear-gradient(0deg,#1d1710 0 3px,#261d14 3px 4px);transform:rotate(-.5deg) scale(1.02);transition:transform 1.1s cubic-bezier(.7,0,.25,1)}
+.redact.on .tape{transform:translateX(112%) rotate(-.5deg)}
+.peel{font-size:.86rem;font-style:italic;color:var(--muted);margin:6px 0 0;transition:opacity .4s;min-height:1.3em}
+.orders{margin:14px 0 6px;padding:14px 16px;text-align:left;background:rgba(255,251,238,.6);border:1px solid var(--ink);box-shadow:4px 4px 0 var(--rule);
+  font-family:var(--type);opacity:0;transform:translateY(8px);transition:opacity .7s .3s,transform .7s .3s}
+.orders.on{opacity:1;transform:none}
+.orders h3{margin:0 0 6px;font-family:var(--serif);font-weight:700;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+.orders p{margin:0;font-size:1rem;line-height:1.5}
+.standing{font-size:.9rem;font-style:italic;color:var(--muted);margin:14px 0 4px;line-height:1.5}
+.standing strong{font-style:normal;color:var(--green)}
+.sign{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 16px;font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--ink)}
+.mini-seal{width:26px;height:26px;border-radius:52% 48% 55% 45% / 47% 55% 45% 53%;background:radial-gradient(circle at 36% 30%,#c9363c,#8a1a20 65%);box-shadow:0 1px 2px rgba(0,0,0,.4),inset 0 -1px 2px rgba(0,0,0,.3)}
+
+/* ---------- editor's desk ---------- */
+details{margin-top:30px;border-top:3px solid var(--green);padding-top:10px}
+summary{cursor:pointer;font-family:var(--serif);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green)}
+label{display:block;font-size:.9rem;font-style:italic;color:var(--muted);margin:14px 0 4px}
+textarea,input[type=text]{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--ink);border-radius:2px;background:rgba(255,251,238,.7);color:var(--ink)}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.small{font-size:.88rem;color:var(--muted);font-style:italic;line-height:1.45;margin:10px 0}
+.err{color:var(--red);font-size:.92rem;margin-top:6px;min-height:1.2em}
+.codebox{word-break:break-all;font-family:var(--type);font-size:.74rem;background:rgba(255,251,238,.7);border:1px dashed var(--ink);padding:10px;margin-top:8px}
+.foot{text-align:center;margin-top:22px;font-family:var(--serif);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+
+.codeblock{max-width:340px;margin:6px auto 0;text-align:center}
+.codeblock label{margin:0 0 6px;font-family:var(--serif);font-style:normal;font-weight:700;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
+.codeblock input{text-align:center;font-family:var(--type);font-size:1.1rem;letter-spacing:.03em;padding:12px 6px}
+.codeblock .hint{margin:8px 0 0;font-size:.82rem;font-style:italic;color:var(--muted);line-height:1.35}
+.codeblock input::placeholder{color:#b9a77f;letter-spacing:.03em}
+.codeblock .err{min-height:1.5em;margin:8px 0 10px;font-style:italic}
+.btn:disabled{opacity:.6;cursor:wait}
+.envelope.shake{animation:tremble .5s}
+@keyframes tremble{0%,100%{transform:rotate(-1.2deg)}15%{transform:rotate(-4deg) translateX(-4px)}35%{transform:rotate(1.8deg) translateX(4px)}55%{transform:rotate(-3deg) translateX(-3px)}75%{transform:rotate(.6deg) translateX(2px)}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <div class="kicker">Winter Wonderland News · Special Edition</div>
+    <h1 aria-label="Secret Santa"><span class="a">Secret</span><span class="b">Santa</span></h1>
+    <p class="tagline">A strictly confidential dispatch for the Domani Pizzeria company outing</p>
+    <div class="dateline"><span>Wednesday, 16 December 2026</span><span>Lausanne</span><span>Gifts CHF 10–20</span></div>
+  </header>
+
+  <div class="orn" aria-hidden="true">❦</div>
+
+  <section id="pick"></section>
+  <section id="envelopeView" hidden></section>
+
+  <div class="orn" aria-hidden="true">❦</div>
+  <div class="foot">Each envelope opens only with its owner’s secret password</div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Your confidential dispatch"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* Encrypted envelopes: each entry can only be opened with its owner's personal code.
+     The page contains no readable assignments, only AES-GCM ciphertext. */
+  var ENVELOPES = [{"n": "Sophie", "s": "YuCV5tzR4cDiftrAE1EWKA==", "i": "Ulk1N7VupNOn/bje", "c": "EaShQljeTikDkZW5GhCG+x3yviCWd9Rhi6HGoNARFxoIpvVSlVPmfKBjhn1vZ0/OgHEm1FMZhYFQvnSkD4mjfhvfoQ7+a7qitvXkKwciXatJ1oO4+HSluQU="}, {"n": "Quentin", "s": "2DGGzRZ7rbrDTyHtUkFY/w==", "i": "U1/n3T8uZ7QWYRsZ", "c": "sM4TXNC2zVS7Z9LOEoswqTf+YdKxD6dzjZtio+gG4AVzu2ef27SMiHaoUXbuIOdXwVEExXhW5L2ip40IwmjMU1sD/VAVEypP2SHOxW0CXYpgxCq95pJQ3r5rOYpqU7w6MAqWfilcW2sK3ffohtVAo4rYbJE="}, {"n": "Irene", "s": "Ght4RnQRjmzy0V94Ze47pA==", "i": "GdUOp9HsaK7Z8YPf", "c": "1q0AcuvSNDhd5SXQ0G0l/S3UL+YM9MU32QS5v0gJec23Icya55E/TIU+fWnxXHoBCXokXTllh1n6UoqEqpN4/LJ3R/FqMIKLNW6lXOStMLgb+MrHhcm7lQ2Fudue9f7U7LcZ0uqYA3gaZlc="}, {"n": "Simon", "s": "UZRxsWErMa+ModvVJxusQg==", "i": "spWb2gFo1O5Y5QpC", "c": "jp4WArWFqICA8InVy/YzEO1oM8ymj7q+z3m1GknRWfAtcvtPDqpNyHK8Hzn9GNKv21KHTg3l/CGgWBfP9uQUwLa4Afc5ruDIZDxib1RVp1Tg9oc11kafegQ0TVcOGEzGaCfuLFeK8QSqZbcLb/hMKBlR+rOoitrROufd"}, {"n": "Ivy", "s": "0aEXSri/TONA1hy11q8+tA==", "i": "n9kfav3SfuDNsCgS", "c": "Yb8gDCjXqgnq8ceLlRcMDtavK0WwVpKhSKV5CgY0m+JVbiBagF3VLVpHIwGi+ISn+BIiLuL1ecGxs6AfcT+H8eznJY6iMrhp3hu4aA1vycwJKrWj7300sXL0LVNyi7Y07Pu57Aj3VzV7GQ0ZnkdFRSlxpZ2gCps="}, {"n": "Jurgita", "s": "BoS4yP9hV97zbo3vgu6sGw==", "i": "/MO64fmMmpBKkRRM", "c": "tszT0qD3We9ixIJBIkqSso+IZdLAYNdv3/q0Ok1nX/znX3411noKRHJOeLr6uHnKmhyyNlW2OmppMKAKEx583+Cb14pIqBF9sY4VILaJUS3PjR50Pnx1DwsZdM22"}, {"n": "Salvo", "s": "yffXd3pHemE1Y5Yyf/Or8w==", "i": "qt7y2X2c75mLoNtJ", "c": "Ip5mtG6Hi2+PFOeV8vzsN4uqvSAl7CWPoztZt0DmCUSfxQKRGYDbGr3tRqab4e+KJ5va8GhbfvAMwTZ5NMLtmb2YK9ldYKIjKpYTf1YZ4h9D50Z4mpdfYm5um/XIRSpcqFu5sUsVqF4ugNVkw+Eb8Trux3bSRqukBX2LIA=="}];
+
+  var who = null;
+  var unlocked = {};   // kept in memory only, forgotten on reload
+  var failures = 0, lockUntil = 0;
+
+  var ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'];
+  function roman(n){ return ROMAN[n] || String(n+1); }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  var $ = function(id){ return document.getElementById(id); };
+  function find(name){ for(var i=0;i<ENVELOPES.length;i++){ if(ENVELOPES[i].n===name) return ENVELOPES[i]; } return null; }
+
+  function b64(s){ var bin = atob(s), a = new Uint8Array(bin.length); for(var i=0;i<bin.length;i++) a[i]=bin.charCodeAt(i); return a; }
+  function unlock(entry, code){
+    var enc = new TextEncoder();
+    return crypto.subtle.importKey('raw', enc.encode(code), 'PBKDF2', false, ['deriveKey']).then(function(base){
+      return crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(entry.s), iterations:800000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+    }).then(function(key){
+      return crypto.subtle.decrypt({name:'AES-GCM', iv:b64(entry.i)}, key, b64(entry.c));
+    }).then(function(pt){
+      return JSON.parse(new TextDecoder().decode(pt));
+    });
+  }
+  function normalise(v){ return String(v).toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,60); }
+
+  /* ---------- roll call ---------- */
+  function renderPick(){
+    var h = '<span class="eyebrow">The Roll Call</span><h2>Who is collecting an envelope?</h2><p class="sub">Select your own name, then whisper the secret password you were given.</p><div class="roll">';
+    ENVELOPES.forEach(function(e,i){
+      h += '<button class="row-btn" type="button" data-n="'+esc(e.n)+'"><span class="no">No. '+roman(i)+'</span><span class="nm">'+esc(e.n)+'</span><span class="dots"></span><span class="go">Collect &rsaquo;</span></button>';
+    });
+    h += '</div>';
+    $('pick').innerHTML = h;
+    $('pick').hidden = false;
+    $('envelopeView').hidden = true;
+    $('pick').querySelectorAll('.row-btn').forEach(function(b){
+      b.addEventListener('click', function(){ who = b.getAttribute('data-n'); renderEnvelope(); window.scrollTo({top:0,behavior:'smooth'}); });
+    });
+  }
+
+  /* ---------- envelope ---------- */
+  function renderEnvelope(){
+    var already = !!unlocked[who];
+    var h = '';
+    h += '<span class="eyebrow">Sealed Dispatch</span><h2>An envelope for '+esc(who)+'</h2>';
+    h += '<p class="sub">It opens only with '+esc(who)+'’s secret password.</p>';
+    h += '<div class="stage"><div class="envelope'+(already?' open':'')+'" id="env">';
+    h +=   '<div class="env-back"></div>';
+    h +=   '<div class="letter"><b>TOP SECRET</b><i></i><i></i><i style="width:72%"></i><i></i><i style="width:48%"></i></div>';
+    h +=   '<div class="env-front"></div>';
+    h +=   '<svg class="lines" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,200 132,92" fill="none" stroke="rgba(70,45,15,.4)" stroke-width="1"/><polyline points="300,200 168,92" fill="none" stroke="rgba(70,45,15,.4)" stroke-width="1"/></svg>';
+    h +=   '<svg class="lines v" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,0 150,112 300,0" fill="none" stroke="rgba(70,45,15,.5)" stroke-width="1.2"/></svg>';
+    h +=   '<div class="addr"><small>Strictly confidential</small><strong>'+esc(who)+'</strong></div>';
+    h +=   '<div class="stamp-p"><span>✦</span>CHF<br>20</div>';
+    h +=   '<svg class="postmark" viewBox="0 0 150 100" aria-hidden="true"><defs><path id="pm" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"/></defs>' +
+            '<circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="23" fill="none" stroke="currentColor" stroke-width="1"/>' +
+            '<text font-family="Special Elite, Courier New, monospace" font-size="8.5" letter-spacing="1.4" fill="currentColor"><textPath href="#pm">LAUSANNE · 16 XII 2026 ·</textPath></text>' +
+            '<text x="50" y="53" text-anchor="middle" font-family="Special Elite, Courier New, monospace" font-size="9" fill="currentColor">SANTA</text>' +
+            '<g fill="none" stroke="currentColor" stroke-width="2"><path d="M96,34 q6,-6 12,0 t12,0 t12,0 t12,0"/><path d="M96,48 q6,-6 12,0 t12,0 t12,0 t12,0"/><path d="M96,62 q6,-6 12,0 t12,0 t12,0 t12,0"/></g></svg>';
+    h +=   '<div class="flap"></div>';
+    h +=   '<button class="seal" id="seal" type="button" aria-label="Break the seal">S</button>';
+    h += '</div></div>';
+    if(already){
+      h += '<div class="center"><button class="btn" id="again" type="button">Read my dispatch again</button></div>';
+    } else {
+      h += '<div class="codeblock">' +
+             '<label for="code">Your secret password</label>' +
+             '<input type="text" id="code" placeholder="Funny-Phrase-000" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="codeErr">' +
+             '<p class="hint">Hint: a funny Italian Christmas phrase, then a number. Spaces and hyphens optional.</p>' +
+             '<div class="err" id="codeErr" role="alert"></div>' +
+             '<div class="center"><button class="btn" id="unseal" type="button">Break the seal</button></div>' +
+           '</div>';
+    }
+    h += '<p class="who-note">Not '+esc(who)+'? <button class="link" id="notme" type="button">Return to the roll call</button></p>';
+    $('envelopeView').innerHTML = h;
+    $('envelopeView').hidden = false;
+    $('pick').hidden = true;
+
+    $('notme').addEventListener('click', function(){ who = null; renderPick(); });
+    if(already){
+      $('again').addEventListener('click', function(){ showCard(unlocked[who]); });
+    } else {
+      var inp = $('code');
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter') attempt(); });
+      $('unseal').addEventListener('click', attempt);
+      $('seal').addEventListener('click', function(e){ e.stopPropagation(); attempt(); });
+      $('env').addEventListener('click', attempt);
+    }
+  }
+
+  function tremble(){
+    var env = $('env'); if(!env) return;
+    env.classList.remove('shake'); void env.offsetWidth; env.classList.add('shake');
+  }
+
+  var busy = false;
+  function attempt(){
+    if(busy) return;
+    var inp = $('code'), err = $('codeErr'), btn = $('unseal');
+    if(!inp) return;
+    var now = Date.now();
+    if(now < lockUntil){
+      err.textContent = 'Please wait ' + Math.ceil((lockUntil-now)/1000) + ' seconds before trying again.';
+      tremble(); return;
+    }
+    var code = normalise(inp.value);
+    if(code.length < 6){
+      err.textContent = 'Mamma mia! Type your secret password first.';
+      tremble(); inp.focus(); return;
+    }
+    if(!(window.crypto && crypto.subtle)){
+      err.textContent = 'This browser cannot unlock envelopes. Please open the page in a current browser over https.';
+      return;
+    }
+    busy = true; btn.disabled = true; btn.textContent = 'Checking…'; err.textContent = '';
+    unlock(find(who), code).then(function(payload){
+      failures = 0;
+      unlocked[who] = payload;
+      busy = false;
+      $('env').classList.add('open');
+      setTimeout(function(){ showCard(payload); }, 1500);
+    }, function(){
+      failures++;
+      busy = false;
+      btn.disabled = false; btn.textContent = 'Break the seal';
+      if(failures >= 3){ lockUntil = Date.now() + Math.min(60, (failures-2)*5) * 1000; }
+      err.textContent = 'Mamma mia! That password does not fit this envelope.';
+      tremble();
+    });
+  }
+
+  /* ---------- the dispatch ---------- */
+  function showCard(p){
+    var ov = $('overlay');
+    ov.innerHTML =
+      '<div class="card">' +
+        '<div class="kick">Winter Wonderland News · Special Dispatch</div>' +
+        '<div class="topsecret">TOP SECRET</div>' +
+        '<p class="dear">Dear '+esc(who)+',</p>' +
+        '<p class="lead">You have been entrusted with the Secret Santa duties for:</p>' +
+        '<div class="redact" id="redact" role="button" tabindex="0" aria-label="Lift the censor’s tape to reveal your giftee">' +
+          '<div class="nm">'+esc(p.t)+'</div><div class="tape">CLASSIFIED</div>' +
+        '</div>' +
+        '<p class="peel" id="peel">Tap the tape to reveal</p>' +
+        '<div class="orders" id="orders"><h3>Your secret mission</h3><p>'+esc(p.m)+'</p></div>' +
+        '<div class="orn" aria-hidden="true">❦</div>' +
+        '<p class="standing"><strong>Standing orders:</strong> gifts of CHF 10–20, something small, yet meaningful. Think of the person, not the price tag. The exchange takes place at lunch on <strong>16 December</strong>. Discretion is expected.</p>' +
+        '<div class="sign"><span>The Secret Santa Committee</span><span class="mini-seal"></span></div>' +
+        '<button class="btn" id="close" type="button">Seal &amp; conceal</button>' +
+      '</div>';
+    ov.classList.add('show');
+
+    var rd = $('redact');
+    function reveal(){
+      if(rd.classList.contains('on')) return;
+      rd.classList.add('on');
+      $('orders').classList.add('on');
+      $('peel').style.opacity = 0;
+    }
+    rd.addEventListener('click', reveal);
+    rd.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); reveal(); } });
+    $('close').addEventListener('click', hideCard);
+  }
+
+  function hideCard(){
+    $('overlay').classList.remove('show');
+    $('overlay').innerHTML = '';
+    if(who) renderEnvelope();
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && $('overlay').classList.contains('show')) hideCard(); });
+
+  renderPick();
+})();
+</script>
+</body>
+</html>
